@@ -8,11 +8,11 @@
         <% end %>
     </div>
 </div>
-<% @var.each do |var| %>
+<% @songs.each do |var| %>
     <div class="row">
         <div class="songDiv">        
             <h3><b><%= var.name %></b> by, <%= var.author %></h3>
-            <h3><%= var.desc %></h3> 
+            <h3><%= link_to "View Details", song_path(var) %></h3>
         </div>    
     </div>
 <% end %>

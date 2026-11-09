@@ -1,11 +1,17 @@
 class SongsController < ApplicationController
     def index
-       @var = Song.all
+       @songs = Song.all
     end
     def search
         puts("**************")
         puts(params)
         puts("**************")
-        @var = Song.where(:name).includes(params[:query]).all
+        @songs = Song.where("name LIKE ?", "%" + params[:query] + "%").all
+    end
+    def show
+        puts("**************")
+        puts(params)
+        puts("**************")
+        @song = Song.find(params[:id])
     end
 end
