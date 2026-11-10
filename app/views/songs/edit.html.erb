@@ -1,0 +1,11 @@
+<h1>Edit Song</h1>
+
+<div class="row">
+    <%= render "form", song: @song %>
+</div>
+<div class="row">
+    <%= button_to "Delete", @song, method: :delete, data: { turbo_confirm: "Are You Sure?" } %>
+</div>
+<div class="row">
+    <%= link_to "Cancel", song_path(@song) %>
+</div>

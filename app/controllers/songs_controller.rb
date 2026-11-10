@@ -1,17 +1,13 @@
 class SongsController < ApplicationController
+    before_action :set_song, only: %i[show edit update destroy]
+
     def index
        @songs = Song.all
     end
     def search
-        puts("**************")
-        puts(params)
-        puts("**************")
-        @songs = Song.where("name LIKE ?", "%" + params[:query] + "%").all
+        @songs = Song.where("name LIKE ?", "%" + params[:query] + "%").or(Song.where("author LIKE ?", "%" + params[:query] + "%")).all
     end
     def show
-        puts("**************")
-        puts(params)
-        puts("**************")
         @song = Song.find(params[:id])
     end
     def new
@@ -22,10 +18,28 @@ class SongsController < ApplicationController
         if @song.save
             redirect_to @song
         else
-            render :new, status: :unporcessable_entity
+            render :new
         end
     end
+    def edit
+        @song = Song.find([params[:id]])
+    end
+    def update
+        @song = Song.find(params[:id])
+        if @song.update(song_params)
+            redirect_to @song
+        else
+            render :edit
+        end
+    end
+    def destroy
+        @song.destroy
+        redirect_to songs_path
+    end
     private
+        def set_song
+            @song = Song.find(params[:id])
+        end 
         def song_params
             params.expect(song: [:name, :author, :desc])
         end

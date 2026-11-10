@@ -1,5 +1,10 @@
 <h1>Songs</h1>
 <div class="row">
+    <div class="link">
+        <%= link_to "Add a song", new_song_path %>
+    </div>    
+</div>
+<div class="row">
     <div class="container">
         <%= form_with url: "/songs/search", method: :get do |form| %>
             <%= form.label :query, "Search for:" %>
@@ -9,11 +14,10 @@
     </div>
 </div>
 <% @songs.each do |var| %>
+    <div class="row">      
+        <h3><b><%= var.name %></b> by, <%= var.author %></h3>
+    </div>
     <div class="row">
-        <div class="songDiv">        
-            <h3><b><%= var.name %></b> by, <%= var.author %></h3>
-            <h3><%= link_to "View Details", song_path(var) %></h3>
-        </div>    
+        <%= link_to "View Details", song_path(var) %>
     </div>
 <% end %>
-<%= link_to "Add a song", new_song %>
