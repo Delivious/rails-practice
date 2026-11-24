@@ -9,5 +9,49 @@
     <p><strong>Desc:</strong> <%= @song.desc %></p>
 </div>
 <div class="row">
+    <%= image_tag @song.featured_image, id: "songImage", width: 300, height: 300 if @song.featured_image.attached? %>
+    <%= audio_tag @song.featured_audio, id: "songAudio" if @song.featured_audio.attached? %>
+</div>
+<div class="row">
     <%= link_to "Edit Song", edit_song_path(@song.id) %>
 </div>
+
+<script>
+    document.getElementById("songImage").addEventListener("click", (e)=>{
+        if(!isPlaying(document.getElementById("songAudio"))){
+            document.getElementById("songAudio").play();
+            sizeChange(document.getElementById("songImage"));
+        }
+        else{
+            document.getElementById("songAudio").pause();
+            sizeChange(document.getElementById("songImage"));
+        }
+    function sizeChange(songImage){
+        songImage.style.transform = "scale(1.03)";
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.06)";
+        }, 10)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.09)";
+        }, 20)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.12)";
+        }, 30)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.09)";
+        }, 40)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.06)";
+        }, 50)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.03)";
+        }, 60)
+        setTimeout(()=>{
+            songImage.style.transform = "scale(1.0)";
+        }, 70)
+    }
+    function isPlaying(audio){
+        return (audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2);
+    }
+    });
+</script>

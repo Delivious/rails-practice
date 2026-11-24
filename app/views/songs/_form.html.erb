@@ -12,6 +12,14 @@
         <%= form.text_field :desc %>
     </div>
     <div class="row">
+        <%= form.label :featured_image %>
+        <%= form.file_field :featured_image, accept: "image/*" %>
+    </div>
+    <div class="row">
+        <%= form.label :featured_audio %>
+        <%= form.file_field :featured_audio, accept: "audio/*" %>
+    </div>
+    <div class="row">
         <%= form.submit %>
     </div>
 <% end %>

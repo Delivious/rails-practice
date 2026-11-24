@@ -41,6 +41,6 @@ class SongsController < ApplicationController
             @song = Song.find(params[:id])
         end 
         def song_params
-            params.expect(song: [:name, :author, :desc])
+            params.expect(song: [:name, :author, :desc, :featured_image, :featured_audio])
         end
 end
